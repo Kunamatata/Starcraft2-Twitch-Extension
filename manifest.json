@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "Starcraft2 Twitch Extension",
+  "version": "1.0",
+  "homepage_url": "https://www.github.com/<my_repo>",
+  "description": "Allows users to see the list of current live starcraft 2 streams on twitch",
+
+  "icons": {
+    "48": "icons/border-48.png"
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "browser_action": {
+    "default_icon": "sc2.png",
+    "default_title": "Sc2TwitchStreams",
+    "default_popup": "index.html"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": ["webRequest", "alarms"]
+}
