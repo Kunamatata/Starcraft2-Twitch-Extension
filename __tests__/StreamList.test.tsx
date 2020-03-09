@@ -1,11 +1,11 @@
-import { mount } from "enzyme";
+import axios from "axios";
+import { render, wait } from "@testing-library/react";
 import React from "react";
 import { StreamList, sumOfAllViewers } from "../src/containers/StreamList";
-import axios from "axios";
 
 const mockStreams = [
   {
-    id: "750252737",
+    id: "750252736",
     user_id: "30220059",
     user_name: "ESL_SC2",
     game_id: "490422",
@@ -56,14 +56,13 @@ describe("StreamList", () => {
   });
   describe("When given valid input data", () => {
     it("should render a list of streams", async () => {
-      jest.useFakeTimers();
-      jest.runAllTimers();
-
-      jest.spyOn(axios, "get").mockResolvedValue({ data: mockStreams });
-      const component = mount(<StreamList />);
-      setTimeout(() => {
-        expect(component.find(".stream").length).toBe(2);
-      }, 200);
+      jest
+        .spyOn(axios, "get")
+        .mockResolvedValue({ data: { data: mockStreams } });
+      const component = render(<StreamList />);
+      await wait(() => {
+        expect(component.container.querySelectorAll(".stream").length).toBe(2);
+      });
     });
   });
 });
